@@ -1,0 +1,594 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "OZA-LAB APIs",
+      "version": "1.0.0",
+      "servers": [
+        {
+          "url": "http://localhost:3000"
+        }
+      ]
+    },
+    "tags": [
+      {
+        "name": "Users",
+        "description": "Endpoint related to Users"
+      }
+    ],
+    "paths": {
+      "/users": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Add a new user",
+          "description": "Add a new user",
+          "operationId": "addUser",
+          "requestBody": {
+            "description": "User Creation Payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersPostRequestBody"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Successfully created an user",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UserResponseBody"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/BadRequest"
+            },
+            "401": {
+              "$ref": "#/components/responses/Unauthorized"
+            },
+            "403": {
+              "$ref": "#/components/responses/Forbidden"
+            },
+            "409": {
+              "$ref": "#/components/responses/Conflict"
+            },
+            "422": {
+              "$ref": "#/components/responses/UnprocessableEntity"
+            },
+            "500": {
+              "$ref": "#/components/responses/InternalServerError"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "List users",
+          "description": "List users",
+          "operationId": "listUsers",
+          "parameters": [
+            {
+              "$ref": "#/components/parameters/PageFilter"
+            },
+            {
+              "$ref": "#/components/parameters/PerPageFilter"
+            },
+            {
+              "$ref": "#/components/parameters/SortFilter"
+            },
+            {
+              "$ref": "#/components/parameters/FieldsFilter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully list users",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UserListResponseBody"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/BadRequest"
+            },
+            "401": {
+              "$ref": "#/components/responses/Unauthorized"
+            },
+            "403": {
+              "$ref": "#/components/responses/Forbidden"
+            },
+            "404": {
+              "$ref": "#/components/responses/ResourceNotFound"
+            },
+            "409": {
+              "$ref": "#/components/responses/Conflict"
+            },
+            "422": {
+              "$ref": "#/components/responses/UnprocessableEntity"
+            },
+            "500": {
+              "$ref": "#/components/responses/InternalServerError"
+            }
+          }
+        }
+      },
+      "/users/{id}": {
+        "patch": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Update a user",
+          "description": "Update a visitor",
+          "operationId": "updateVisitor",
+          "parameters": [
+            {
+              "$ref": "#/components/parameters/UserIdParam"
+            }
+          ],
+          "requestBody": {
+            "description": "Update a visitor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserPatchRequestBody"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "204": {
+              "description": "Successfully updated the user"
+            },
+            "400": {
+              "$ref": "#/components/responses/BadRequest"
+            },
+            "401": {
+              "$ref": "#/components/responses/Unauthorized"
+            },
+            "403": {
+              "$ref": "#/components/responses/Forbidden"
+            },
+            "404": {
+              "$ref": "#/components/responses/ResourceNotFound"
+            },
+            "409": {
+              "$ref": "#/components/responses/Conflict"
+            },
+            "422": {
+              "$ref": "#/components/responses/UnprocessableEntity"
+            },
+            "500": {
+              "$ref": "#/components/responses/InternalServerError"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Read a user",
+          "description": "Read a user",
+          "operationId": "getUser",
+          "parameters": [
+            {
+              "$ref": "#/components/parameters/FieldsFilter"
+            },
+            {
+              "$ref": "#/components/parameters/UserIdParam"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully read the user",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UserResponseBody"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/BadRequest"
+            },
+            "401": {
+              "$ref": "#/components/responses/Unauthorized"
+            },
+            "403": {
+              "$ref": "#/components/responses/Forbidden"
+            },
+            "404": {
+              "$ref": "#/components/responses/ResourceNotFound"
+            },
+            "409": {
+              "$ref": "#/components/responses/Conflict"
+            },
+            "422": {
+              "$ref": "#/components/responses/UnprocessableEntity"
+            },
+            "500": {
+              "$ref": "#/components/responses/InternalServerError"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Delete a user",
+          "description": "Delete a user",
+          "operationId": "deleteVisitor",
+          "parameters": [
+            {
+              "$ref": "#/components/parameters/UserIdParam"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Successfully deleted the user"
+            },
+            "400": {
+              "$ref": "#/components/responses/BadRequest"
+            },
+            "401": {
+              "$ref": "#/components/responses/Unauthorized"
+            },
+            "403": {
+              "$ref": "#/components/responses/Forbidden"
+            },
+            "404": {
+              "$ref": "#/components/responses/ResourceNotFound"
+            },
+            "409": {
+              "$ref": "#/components/responses/Conflict"
+            },
+            "422": {
+              "$ref": "#/components/responses/UnprocessableEntity"
+            },
+            "500": {
+              "$ref": "#/components/responses/InternalServerError"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Link": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url"
+            }
+          }
+        },
+        "DeprecationInformation": {
+          "type": "object",
+          "properties": {
+            "deprecated_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "goes_away_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "more_info": {
+              "$ref": "#/components/schemas/Link"
+            }
+          }
+        },
+        "ErrorResponse": {
+          "type": "object",
+          "required": [
+            "errors"
+          ],
+          "properties": {
+            "errors": {
+              "type": "object",
+              "properties": {
+                "resource": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "BasicMeta": {
+          "type": "object",
+          "properties": {
+            "api_version": {
+              "type": "string",
+              "example": "1"
+            },
+            "deprecation_information": {
+              "type": "object",
+              "properties": {
+                "deprecated_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "goes_away_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "more_info": {
+                  "$ref": "#/components/schemas/DeprecationInformation"
+                }
+              }
+            }
+          }
+        },
+        "Meta": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/BasicMeta"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer"
+                },
+                "per_page": {
+                  "type": "integer"
+                },
+                "page_count": {
+                  "type": "integer"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          ]
+        },
+        "ResourceTimestamps": {
+          "type": "object",
+          "properties": {
+            "creationDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updateDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "UsersPostRequestBody": {
+          "$ref": "#/components/schemas/CreateUserAttributes"
+        },
+        "UserPatchRequestBody": {
+          "$ref": "#/components/schemas/UserAttributes"
+        },
+        "UserResponseBody": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "$ref": "#/components/schemas/User"
+            },
+            "meta": {
+              "$ref": "#/components/schemas/BasicMeta"
+            }
+          }
+        },
+        "UserListResponseBody": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "metadata": {
+              "$ref": "#/components/schemas/Meta"
+            }
+          }
+        },
+        "User": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/UserAttributes"
+            },
+            {
+              "$ref": "#/components/schemas/ResourceTimestamps"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id",
+                "firstName",
+                "lastName",
+                "email",
+                "creationDate",
+                "updateDate"
+              ]
+            }
+          ]
+        },
+        "CreateUserAttributes": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/UserAttributes"
+            },
+            {
+              "type": "object",
+              "required": [
+                "firstName",
+                "email",
+                "password"
+              ]
+            }
+          ]
+        },
+        "UserAttributes": {
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "example": "John"
+            },
+            "lastName": {
+              "type": "string",
+              "nullable": true,
+              "example": "Smith"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "example": "tom@jerry.com"
+            },
+            "password": {
+              "type": "string",
+              "example": "Password@123"
+            }
+          }
+        }
+      },
+      "parameters": {
+        "UserIdParam": {
+          "name": "id",
+          "in": "path",
+          "description": "Id of user",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        "PageFilter": {
+          "name": "page",
+          "in": "query",
+          "description": "The page number ti retrieve",
+          "schema": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          }
+        },
+        "PerPageFilter": {
+          "name": "per_page",
+          "in": "query",
+          "description": "Limit number of records",
+          "schema": {
+            "type": "integer",
+            "format": "int64",
+            "maximum": 500,
+            "default": 25,
+            "minimum": 1
+          }
+        },
+        "SortFilter": {
+          "name": "sort",
+          "in": "query",
+          "description": "Sort records by",
+          "schema": {
+            "type": "string",
+            "example": "-creationDate,-updateDate"
+          }
+        },
+        "FieldsFilter": {
+          "name": "fields",
+          "in": "query",
+          "description": "List of fields to return",
+          "schema": {
+            "type": "string",
+            "example": "foo,bar"
+          }
+        }
+      },
+      "responses": {
+        "BadRequest": {
+          "description": "There are problems with the request body format",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorResponse"
+              }
+            }
+          }
+        },
+        "UnprocessableEntity": {
+          "description": "There are problems with the provided attributes",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorResponse"
+              }
+            }
+          }
+        },
+        "ResourceNotFound": {
+          "description": "Resource not found.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorResponse"
+              }
+            }
+          }
+        },
+        "Unauthorized": {
+          "description": "Unauthorized request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorResponse"
+              }
+            }
+          }
+        },
+        "Forbidden": {
+          "description": "Forbidden",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorResponse"
+              }
+            }
+          }
+        },
+        "Conflict": {
+          "description": "When resource (like, visitor, center, etc) already exist.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorResponse"
+              }
+            }
+          }
+        },
+        "InternalServerError": {
+          "description": "A problem occurred at server side.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
