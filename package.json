@@ -1,14 +1,17 @@
 {
-  "name": "test-prisma",
+  "name": "OZA-LAB",
   "version": "1.0.0",
-  "description": "learning primsa",
+  "description": "OZA-LABORATORY",
   "type": "module",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon src/index.js"
+    "start": "npx nodemon src/index.js",
+    "prisma:migrate" : "npx prisma migrate dev",
+    "prisma:generate" : "npx prisma generate"
+
   },
-  "author": "mihir",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^4.9.0",

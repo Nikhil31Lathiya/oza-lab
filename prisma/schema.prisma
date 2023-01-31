@@ -10,11 +10,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  User
+  Admin
+  SuperAdmin
+}
+
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String 
-  nickname String?
-  createdAt DateTime @default(now())
-  @@map("users")
+  id        Int       @id @default(autoincrement())
+  role      Role      @default(User)
+  title     String
+  firstName String    @map("first_name")
+  lastName  String?   @map("last_name")
+  gender    String
+  dob       DateTime
+  email     String    @unique
+  contact   String
+  address   String
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime  @default(now()) @map("updated_at") @db.Timestamp(6)
+  Patient   Patient[]
+
+  @@map("user")
+}
+
+model Patient {
+  id         Int          @id @default(autoincrement())
+  homeVisit  Boolean      @map("home_vist")
+  userId     Int          @map("user_id")
+  testId     Int          @map("test_id")
+  createdAt  DateTime     @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt  DateTime     @default(now()) @map("updated_at") @db.Timestamp(6)
+  user       User         @relation(fields: [userId], references: [id])
+  test       Test         @relation(fields: [testId], references: [id])
+  UserReoprt UserReoprt[]
+
+  @@map("patient")
+}
+
+model Test {
+  id          Int          @id @default(autoincrement())
+  name        String       @map("name")
+  sortName    String       @map("sort_name")
+  isActive    Boolean      @map("is_active")
+  price       Float
+  measurement Json
+  createdAt   DateTime     @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt   DateTime     @default(now()) @map("updated_at") @db.Timestamp(6)
+  Patient     Patient[]
+  UserReoprt  UserReoprt[]
+
+  @@map("test")
+}
+
+model UserReoprt {
+  id        Int      @id @default(autoincrement())
+  patientId Int      @map("patient_id")
+  testId    Int      @map("test_id")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamp(6)
+  patient   Patient  @relation(fields: [patientId], references: [id])
+  test      Test     @relation(fields: [testId], references: [id])
+
+  @@map("user_reoprt")
 }
