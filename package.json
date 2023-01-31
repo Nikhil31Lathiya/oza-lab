@@ -20,7 +20,8 @@
     "http-status-codes": "^2.2.0",
     "joi": "^17.7.0",
     "nodemon": "^2.0.20",
-    "prisma": "^4.9.0"
+    "prisma": "^4.9.0",
+    "swagger-ui-express": "^4.6.0"
   },
   "devDependencies": {
     "eslint": "^8.32.0",
