@@ -43,7 +43,7 @@ model Patient {
   updatedAt  DateTime     @default(now()) @map("updated_at") @db.Timestamp(6)
   user       User         @relation(fields: [userId], references: [id])
   test       Test         @relation(fields: [testId], references: [id])
-  UserReoprt UserReoprt[]
+  UserReport UserReport[]
 
   @@map("patient")
 }
@@ -58,12 +58,12 @@ model Test {
   createdAt   DateTime     @default(now()) @map("created_at") @db.Timestamp(6)
   updatedAt   DateTime     @default(now()) @map("updated_at") @db.Timestamp(6)
   Patient     Patient[]
-  UserReoprt  UserReoprt[]
+  UserReport  UserReport[]
 
   @@map("test")
 }
 
-model UserReoprt {
+model UserReport {
   id        Int      @id @default(autoincrement())
   patientId Int      @map("patient_id")
   testId    Int      @map("test_id")
