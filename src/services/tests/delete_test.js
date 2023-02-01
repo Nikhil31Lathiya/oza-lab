@@ -8,5 +8,6 @@ export async function deleteTest(req, res) {
   if (test) {
     return res.status(OK).json(test);
   }
+
   res.status(NOT_FOUND).json({ message: "test not found" });
 }
