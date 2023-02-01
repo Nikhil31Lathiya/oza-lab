@@ -11,4 +11,4 @@ userRoute.post('/', (req, res) => createUser(req, res))
 userRoute.delete('/:id', (req, res) => deleteUser(req, res))
 userRoute.patch('/:id', (req, res) => updateUser(req, res))
 
-export default userRoute
+export default userRoute;

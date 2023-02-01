@@ -7,9 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx nodemon src/index.js",
-    "prisma:migrate" : "npx prisma migrate dev",
-    "prisma:generate" : "npx prisma generate"
-
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:generate": "npx prisma generate"
   },
   "author": "",
   "license": "ISC",

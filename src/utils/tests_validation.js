@@ -1,0 +1,16 @@
+import Joi from 'joi';
+
+export const createTestSchema = (body) => {
+    return Joi.object({
+      name: Joi.string().max(40).min(2).required(),
+      shortName: Joi.string().max(30).min(2).required(),
+      isActive: Joi.bool().required(),
+      price: Joi.number().required(),
+    }).validate(body);
+}
+
+export const deleteTestSchema =(param) => {
+    return Joi.object({
+        id: Joi.number().required()
+    }).validate()
+}
