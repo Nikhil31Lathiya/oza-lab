@@ -72,5 +72,5 @@ model UserReport {
   patient   Patient  @relation(fields: [patientId], references: [id])
   test      Test     @relation(fields: [testId], references: [id])
 
-  @@map("user_reoprt")
+  @@map("user_report")
 }
