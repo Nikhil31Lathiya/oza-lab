@@ -6,13 +6,13 @@ import Joi from 'joi'
 export const createUserSchema = (body) => {
   return Joi.object({
     email: Joi.string().email().required(),
-    firstName: Joi.string().max(30).min(2).required(),
-    lastName: Joi.string().optional().allow(''),
-    role: Joi.string().valid('User', 'Admin', 'SuperAdmin'),
-    gender: Joi.string().valid('male', 'female'),
-    title: Joi.string().valid('mr', 'ms', 'baby', 'master', 'dr'),
-    // dob: Joi.string(),
-    address: Joi.string().max(100).min(2).required(),
+    firstName: Joi.string().min(2).max(30).required(),
+    lastName: Joi.string().allow('').optional(),
+    role: Joi.string().valid('User', 'Admin', 'SuperAdmin').required(),
+    gender: Joi.string().valid('Male', 'Female').required(),
+    title: Joi.string().valid('Mr', 'Ms', 'Baby', 'Master', 'Dr').required(),
+    dob: Joi.date().required(),
+    address: Joi.string().min(2).max(100).required(),
     contact: Joi.string().length(10).pattern(/^[0-9]+$/).required()
   }).validate(body)
 }
