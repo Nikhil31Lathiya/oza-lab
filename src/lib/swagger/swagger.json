@@ -324,7 +324,7 @@
               }
             }
           },
-          "required":true
+          "required": true
         },
         "responses": {
           "201": {
@@ -364,7 +364,12 @@
         "summary": "Read a Test",
         "description": "Read a Test",
         "operationId": "getTest",
-        "parameters": [{}],
+        "parameters": [
+          { "$ref": "#/components/parameters/FieldsFilter" },
+          {
+            "$ref": "#/components/parameters/TestIdParam"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successfully read the user",
@@ -404,7 +409,7 @@
         "summary": "Update a Test",
         "description": "Update a Test",
         "operationId": "updateTest",
-        "parameters": [{}],
+        "parameters": [{ "$ref": "#/components/parameters/TestIdParam" }],
         "requestBody": {
           "description": "Update a Test",
           "content": {
@@ -448,7 +453,7 @@
         "summary": "Delete a Test",
         "description": "Delete a Test",
         "operationId": "DeleteTest",
-        "parameters": [{}],
+        "parameters": [{ "$ref": "#/components/parameters/TestIdParam" }],
         "responses": {
           "204": {
             "description": "Successfully deleted the Test"
@@ -796,6 +801,15 @@
         "name": "id",
         "in": "path",
         "description": "Id of user",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "TestIdParam": {
+        "name": "id",
+        "in": "path",
+        "description": "Id of Test",
         "required": true,
         "schema": {
           "type": "integer"

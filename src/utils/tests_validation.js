@@ -6,7 +6,7 @@ export const createTestSchema = (body) => {
       shortName: Joi.string().min(2).max(40).required(),
       isActive: Joi.bool().required(),
       price: Joi.number().required(),
-      measurement : Joi.object().required()
+      measurement : Joi.object()
     }).validate(body);
 }
 
