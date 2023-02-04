@@ -2,7 +2,7 @@
     "openapi": "3.0.3",
     "info": {
       "title": "OZA-LAB APIs",
-      "version": "1.0.0",
+      "version": "3.0.3",
       "servers": [
         {
           "url": "http://localhost:3000"
@@ -37,7 +37,7 @@
           },
           "responses": {
             "201": {
-              "description": "Successfully created an user",
+              "description": "Successfully Created The User",
               "content": {
                 "application/json": {
                   "schema": {
@@ -89,7 +89,7 @@
           ],
           "responses": {
             "200": {
-              "description": "Successfully list users",
+              "description": "Successfully list The All Users",
               "content": {
                 "application/json": {
                   "schema": {
@@ -127,7 +127,7 @@
           "tags": [
             "Users"
           ],
-          "summary": "Update a user",
+          "summary": "Update a User",
           "description": "Update a visitor",
           "operationId": "updateVisitor",
           "parameters": [
@@ -419,11 +419,16 @@
               },
               "required": [
                 "id",
+                "role",
+                "title",
                 "firstName",
-                "lastName",
+                "address",
                 "email",
-                "creationDate",
-                "updateDate"
+                "gender",
+                "dateOfBirth",
+                "contact",
+                "createdAt",
+                "updatedAt"
               ]
             }
           ]
@@ -436,9 +441,18 @@
             {
               "type": "object",
               "required": [
+                "id",
+                "role",
+                "title",
                 "firstName",
+                "lastName",
+                "address",
                 "email",
-                "password"
+                "gender",
+                "dateOfBirth",
+                "contact",
+                "createdAt",
+                "updatedAt"
               ]
             }
           ]
@@ -448,21 +462,42 @@
           "properties": {
             "firstName": {
               "type": "string",
-              "example": "John"
+              "example": "Nikhil"
             },
             "lastName": {
               "type": "string",
               "nullable": true,
-              "example": "Smith"
+              "example": "Lathiya"
             },
             "email": {
               "type": "string",
               "format": "email",
-              "example": "tom@jerry.com"
+              "example": "tom@jerry.com"           
             },
-            "password": {
+            "role": {
               "type": "string",
-              "example": "Password@123"
+              "example": "[User] [Admin] [SuperAdmin]",
+              "default": "User"
+            },
+            "gender":{
+              "type": "string",
+              "example":"[male] [female]"
+            },
+            "title":{
+              "type": "string",
+              "example":"[mr] [ms] [baby] [master] [dr] "
+            },
+            "dateOfBirth":{
+              "type": "date",
+              "example":"2002-31-12"
+            },
+            "address":{
+              "type": "string",
+              "example":"street no 123 , gandhidham "
+            },
+            "contact":{
+              "type": "string",
+              "example":"9568569856"
             }
           }
         }
