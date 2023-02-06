@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "OZA-LAB APIs",
-    "version": "1.0.0",
+    "version": "3.0.3",
     "servers": [
       {
         "url": "http://localhost:3000"
@@ -17,6 +17,10 @@
     {
       "name": "Tests",
       "description": "Endpoint related to Tests"
+    },
+    {
+      "name":"patient",
+      "description":"Shows patient information"
     }
   ],
   "paths": {

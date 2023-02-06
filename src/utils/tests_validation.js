@@ -6,12 +6,12 @@ export const createTestSchema = (body) => {
       shortName: Joi.string().min(2).max(40).required(),
       isActive: Joi.bool().required(),
       price: Joi.number().required(),
-      measurement : Joi.string().required(),
+      measurement : Joi.string().required()
     }).validate(body);
 }
 
 export const deleteTestSchema =(param) => {
     return Joi.object({
         id: Joi.number().required()
-    }).validate()
+    }).validate(param)
 }

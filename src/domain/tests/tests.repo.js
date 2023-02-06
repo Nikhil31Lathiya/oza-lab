@@ -38,25 +38,18 @@ class TestRepository {
       if (findTest) {
         return this.prisma.test.delete({ where: { id } });
       } else {
-        return { message: "User not found " };
+        return { message: "Test not found " };
       }
     } catch (error) {
       console.log(error);
     }
   }
 
-  async updateTest(id, data) {
+  async updateTest(id, body) {
     try {
       return this.prisma.test.update({
-        data: {
-          name: data.name,
-          shortName: data.shortName,
-          isActive: data.isActive,
-          price: data.price,
-          measurement: data.measurement,
-          updatedAt: data.updatedAt,
-        },
-        where: { id },
+      
+        where: { id }, data : body
       });
     } catch (error) {
       console.log(error);
