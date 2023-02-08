@@ -2,7 +2,7 @@
     "openapi": "3.0.3",
     "info": {
       "title": "OZA-LAB APIs",
-      "version": "3.0.3",
+      "version": "1.0.0",
       "servers": [
         {
           "url": "http://localhost:3000"
@@ -13,10 +13,15 @@
       {
         "name": "Users",
         "description": "Endpoint related to Users"
+      },
+      {
+        "name": "userReports",
+        "description": "Endpoint related to userReports"
       }
+
     ],
     "paths": {
-      "/users": {
+      "/user": {
         "post": {
           "tags": [
             "Users"
@@ -70,8 +75,8 @@
           "tags": [
             "Users"
           ],
-          "summary": "List users",
-          "description": "List users",
+          "summary": "List of all users",
+          "description": "List  of all users",
           "operationId": "listUsers",
           "parameters": [
             {
@@ -122,14 +127,14 @@
           }
         }
       },
-      "/users/{id}": {
+      "/user/{id}": {
         "patch": {
           "tags": [
             "Users"
           ],
-          "summary": "Update a User",
-          "description": "Update a visitor",
-          "operationId": "updateVisitor",
+          "summary": "Update a Particular User",
+          "description": "Update a particular visitor",
+          "operationId": "updateVisitorReport",
           "parameters": [
             {
               "$ref": "#/components/parameters/UserIdParam"
@@ -177,8 +182,8 @@
           "tags": [
             "Users"
           ],
-          "summary": "Read a user",
-          "description": "Read a user",
+          "summary": "Read a Particular user",
+          "description": "Read a Particular user",
           "operationId": "getUser",
           "parameters": [
             {
@@ -261,8 +266,257 @@
             }
           }
         }
+      },
+      "/userReport": {
+        "post": {
+          "tags": [
+            "userReports"
+          ],
+          "summary": "Add a new Report",
+          "description": "Add a new user report",
+          "operationId": "addUserReport",
+          "requestBody": {
+            "description": "Report Creation Payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserReportPostRequestBody"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Successfully Created The User Report",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/userReportResponseBody"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/BadRequest"
+            },
+            "401": {
+              "$ref": "#/components/responses/Unauthorized"
+            },
+            "403": {
+              "$ref": "#/components/responses/Forbidden"
+            },
+            "409": {
+              "$ref": "#/components/responses/Conflict"
+            },
+            "422": {
+              "$ref": "#/components/responses/UnprocessableEntity"
+            },
+            "500": {
+              "$ref": "#/components/responses/InternalServerError"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "userReports"
+          ],
+          "summary": "List of All Reports",
+          "description": "List of All User Report",
+          "operationId": "listUsersReport",
+          "parameters": [
+            {
+              "$ref": "#/components/parameters/PageFilter"
+            },
+            {
+              "$ref": "#/components/parameters/PerPageFilter"
+            },
+            {
+              "$ref": "#/components/parameters/SortFilter"
+            },
+            {
+              "$ref": "#/components/parameters/FieldsFilter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully list The All Users",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/userReportListResponseBody"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/BadRequest"
+            },
+            "401": {
+              "$ref": "#/components/responses/Unauthorized"
+            },
+            "403": {
+              "$ref": "#/components/responses/Forbidden"
+            },
+            "404": {
+              "$ref": "#/components/responses/ResourceNotFound"
+            },
+            "409": {
+              "$ref": "#/components/responses/Conflict"
+            },
+            "422": {
+              "$ref": "#/components/responses/UnprocessableEntity"
+            },
+            "500": {
+              "$ref": "#/components/responses/InternalServerError"
+            }
+          }
+        }
+      },
+      "/userReport/{id}": {
+        "patch": {
+          "tags": [
+            "userReports"
+          ],
+          "summary": "Update a Particular User Report",
+          "description": "Update a Particular visitor Report",
+          "operationId": "updateVisitorReport",
+          "parameters": [
+            {
+              "$ref": "#/components/parameters/UserIdParam"
+            }
+          ],
+          "requestBody": {
+            "description": "Update a visitor Report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserReportPatchRequestBody"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "204": {
+              "description": "Successfully updated the Report"
+            },
+            "400": {
+              "$ref": "#/components/responses/BadRequest"
+            },
+            "401": {
+              "$ref": "#/components/responses/Unauthorized"
+            },
+            "403": {
+              "$ref": "#/components/responses/Forbidden"
+            },
+            "404": {
+              "$ref": "#/components/responses/ResourceNotFound"
+            },
+            "409": {
+              "$ref": "#/components/responses/Conflict"
+            },
+            "422": {
+              "$ref": "#/components/responses/UnprocessableEntity"
+            },
+            "500": {
+              "$ref": "#/components/responses/InternalServerError"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "userReports"
+          ],
+          "summary": "Read a Particular user Report" ,
+          "description": "Read a Particular user Report",
+          "operationId": "getUserReport",
+          "parameters": [
+            {
+              "$ref": "#/components/parameters/FieldsFilter"
+            },
+            {
+              "$ref": "#/components/parameters/UserIdParam"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully read the user Report",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/userReportResponseBody"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/responses/BadRequest"
+            },
+            "401": {
+              "$ref": "#/components/responses/Unauthorized"
+            },
+            "403": {
+              "$ref": "#/components/responses/Forbidden"
+            },
+            "404": {
+              "$ref": "#/components/responses/ResourceNotFound"
+            },
+            "409": {
+              "$ref": "#/components/responses/Conflict"
+            },
+            "422": {
+              "$ref": "#/components/responses/UnprocessableEntity"
+            },
+            "500": {
+              "$ref": "#/components/responses/InternalServerError"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "userReports"
+          ],
+          "summary": "Delete a Report",
+          "description": "Delete a user Report",
+          "operationId": "deleteVisitorReport",
+          "parameters": [
+            {
+              "$ref": "#/components/parameters/UserIdParam"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Successfully deleted the user Report"
+            },
+            "400": {
+              "$ref": "#/components/responses/BadRequest"
+            },
+            "401": {
+              "$ref": "#/components/responses/Unauthorized"
+            },
+            "403": {
+              "$ref": "#/components/responses/Forbidden"
+            },
+            "404": {
+              "$ref": "#/components/responses/ResourceNotFound"
+            },
+            "409": {
+              "$ref": "#/components/responses/Conflict"
+            },
+            "422": {
+              "$ref": "#/components/responses/UnprocessableEntity"
+            },
+            "500": {
+              "$ref": "#/components/responses/InternalServerError"
+            }
+          }
+        }
       }
-    },
+
+      
+    },   
+     
     "components": {
       "schemas": {
         "Link": {
@@ -374,8 +628,15 @@
         "UsersPostRequestBody": {
           "$ref": "#/components/schemas/CreateUserAttributes"
         },
+        "UserReportPostRequestBody": {
+          "$ref": "#/components/schemas/CreateUserReportAttributes"
+        },
+
         "UserPatchRequestBody": {
           "$ref": "#/components/schemas/UserAttributes"
+        },
+        "UserReportPatchRequestBody": {
+          "$ref": "#/components/schemas/userReportAttributes"
         },
         "UserResponseBody": {
           "type": "object",
@@ -388,6 +649,18 @@
             }
           }
         },
+        "userReportResponseBody": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "$ref": "#/components/schemas/userReport"
+            },
+            "meta": {
+              "$ref": "#/components/schemas/BasicMeta"
+            }
+          }
+        },
+
         "UserListResponseBody": {
           "type": "object",
           "properties": {
@@ -402,6 +675,21 @@
             }
           }
         },
+        "userReportListResponseBody": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/userReport"
+              }
+            },
+            "metadata": {
+              "$ref": "#/components/schemas/Meta"
+            }
+          }
+        },
+           
         "User": {
           "allOf": [
             {
@@ -418,7 +706,6 @@
                 }
               },
               "required": [
-                "id",
                 "role",
                 "title",
                 "firstName",
@@ -429,6 +716,31 @@
                 "contact",
                 "createdAt",
                 "updatedAt"
+              ]
+            }
+          ]
+        },
+        
+        "userReport": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/userReportAttributes"
+            },
+            {
+              "$ref": "#/components/schemas/ResourceTimestamps"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+               
+                "patientId",
+                "testId",
+                "testResult"
               ]
             }
           ]
@@ -441,22 +753,34 @@
             {
               "type": "object",
               "required": [
-                "id",
                 "role",
                 "title",
                 "firstName",
-                "lastName",
                 "address",
                 "email",
                 "gender",
                 "dateOfBirth",
-                "contact",
-                "createdAt",
-                "updatedAt"
+                "contact"
               ]
             }
           ]
         },
+        "CreateUserReportAttributes": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/userReportAttributes"
+            },
+            {
+              "type": "object",
+              "required": [
+                "patientId",
+                "testId",
+                "testResult"
+              ]
+            }
+          ]
+        },
+
         "UserAttributes": {
           "type": "object",
           "properties": {
@@ -476,16 +800,16 @@
             },
             "role": {
               "type": "string",
-              "example": "[User] [Admin] [SuperAdmin]",
+              "example": "User Admin SuperAdmin",
               "default": "User"
             },
             "gender":{
               "type": "string",
-              "example":"[male] [female]"
+              "example":"male female"
             },
             "title":{
               "type": "string",
-              "example":"[mr] [ms] [baby] [master] [dr] "
+              "example":"mr ms master "
             },
             "dateOfBirth":{
               "type": "date",
@@ -500,8 +824,28 @@
               "example":"9568569856"
             }
           }
+        },
+        "userReportAttributes" : {
+          "type": "object",
+          "properties": {
+            "patientId": {
+              "type": "int",
+              "example": "0"
+            },
+            "testId": {
+              "type": "int",
+              "example": "0"
+            },
+            "testResult": {
+              "type": "json",
+              "example": {
+                "wbc" : "5000"
+              }
+            }
         }
-      },
+
+      }
+    },
       "parameters": {
         "UserIdParam": {
           "name": "id",
@@ -625,5 +969,6 @@
           }
         }
       }
+    
     }
   }
