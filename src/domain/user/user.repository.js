@@ -17,6 +17,14 @@ class UserRepository {
     })
   }
 
+  getUserByEmail (email) {
+    return this.prisma.user.findFirst({
+      where: {
+        email
+      }
+    })
+  }
+
   createUser (body) {
     return this.prisma.user.create({
       data: body

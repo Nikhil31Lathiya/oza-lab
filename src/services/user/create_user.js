@@ -1,16 +1,18 @@
 import UserRepository from '../../domain/user/user.repository.js'
 import { createUserSchema } from '../../utils/validations.js'
-import { StatusCodes } from 'http-status-codes'
 
 export async function createUser (req, res) {
   const userRepository = new UserRepository()
   const { error, value } = createUserSchema(req.body)
-  const { BAD_REQUEST, OK } = StatusCodes
   if (error) {
-    return res.status(BAD_REQUEST).json({
+    return res.status(400).json({
       [error.name]: error.message
     })
   }
+  const userFound = await userRepository.getUserByEmail(req.body.email)
+  if (userFound) {
+    return res.status(400).json({ message: 'Email Already Exists Please try again using another email' })
+  }
   const user = await userRepository.createUser(value)
-  res.status(OK).json(user)
+  res.status(200).json(user)
 }
