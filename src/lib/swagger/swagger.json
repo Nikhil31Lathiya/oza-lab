@@ -712,7 +712,7 @@
                 "address",
                 "email",
                 "gender",
-                "dateOfBirth",
+                "dob",
                 "contact",
                 "createdAt",
                 "updatedAt"
@@ -759,7 +759,7 @@
                 "address",
                 "email",
                 "gender",
-                "dateOfBirth",
+                "dob",
                 "contact"
               ]
             }
@@ -809,11 +809,11 @@
             },
             "title":{
               "type": "string",
-              "example":"mr ms master "
+              "example":" mr , ms , baby , master , dr"
             },
-            "dateOfBirth":{
+            "dob":{
               "type": "date",
-              "example":"2002-31-12"
+              "example":"2002-12-31"
             },
             "address":{
               "type": "string",
@@ -828,14 +828,6 @@
         "userReportAttributes" : {
           "type": "object",
           "properties": {
-            "patientId": {
-              "type": "int",
-              "example": "0"
-            },
-            "testId": {
-              "type": "int",
-              "example": "0"
-            },
             "testResult": {
               "type": "json",
               "example": {
@@ -850,7 +842,7 @@
         "UserIdParam": {
           "name": "id",
           "in": "path",
-          "description": "Id of user",
+          "description": "Id",
           "required": true,
           "schema": {
             "type": "integer"

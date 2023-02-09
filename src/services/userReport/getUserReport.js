@@ -7,5 +7,5 @@ export async function getUserReport (req, res) {
   if (user) {
     return res.status(200).json(user)
   }
-  res.status(404).json({ message: 'user Report Not Found' })
+  res.status(404).json({ message: 'Report Not Found' })
 }

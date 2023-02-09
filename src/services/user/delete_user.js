@@ -1,22 +1,18 @@
-import { StatusCodes } from 'http-status-codes/build/cjs/status-codes.js'
 import UserRepository from '../../domain/user/user.repository.js'
 
 export async function deleteUser (req, res) {
   const userRepository = new UserRepository()
-  // const { error, value } = deleteUserSchema({ id: parseInt(req.params.id) })
-  const { OK, NOT_FOUND } = StatusCodes
-  // if (error) {
-  //   return res.status(BAD_REQUEST).json({
-  //     [error.name]: error.message
-  //   })
-  // }
-  // console.log(value)
-  const user = await userRepository.deleteUser(parseInt(req.params.id))
-  console.log(user)
-  if (user) {
-    return res.status(OK).json(user)
+
+  const user = await userRepository.getUser(parseInt(req.params.id))
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' })
+  } else {
+    const deluser = await userRepository.deleteUser(parseInt(req.params.id))
+    if (deluser) {
+      return res.status(200).json(deluser)
+    }
+    res.status(500).json({
+      message: 'Something went wrong while deleting user'
+    })
   }
-  res.status(NOT_FOUND).json({
-    message: 'User not found'
-  })
 }

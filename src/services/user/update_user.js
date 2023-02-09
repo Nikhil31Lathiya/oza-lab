@@ -9,7 +9,6 @@ export async function updateUser (req, res) {
       message: 'User not found'
     })
   }
-
   const user = await userRepository.updateUser(parseInt(req.params.id), req.body)
   return res.status(200).json(user)
 }
