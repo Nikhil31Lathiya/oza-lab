@@ -713,9 +713,7 @@
                 "email",
                 "gender",
                 "dob",
-                "contact",
-                "createdAt",
-                "updatedAt"
+                "contact"
               ]
             }
           ]
@@ -812,7 +810,7 @@
               "example":" mr , ms , baby , master , dr"
             },
             "dob":{
-              "type": "date",
+              "type": "string",
               "example":"2002-12-31"
             },
             "address":{

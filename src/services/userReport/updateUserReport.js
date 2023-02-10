@@ -4,7 +4,6 @@ export async function updateUserReport (req, res) {
   const userReportRepository = new UserReportRepository()
 
   if (req.body.testResult) {
-    console.log(typeof req.body.testResult)
     if (typeof req.body.testResult !== 'object') {
       return res.status(400).json({ message: 'Test Result Should be Object' })
     }
