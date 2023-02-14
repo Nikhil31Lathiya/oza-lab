@@ -636,7 +636,7 @@
           "$ref": "#/components/schemas/UserAttributes"
         },
         "UserReportPatchRequestBody": {
-          "$ref": "#/components/schemas/userReportAttributes"
+          "$ref": "#/components/schemas/updateUserReportAttributes"
         },
         "UserResponseBody": {
           "type": "object",
@@ -826,6 +826,16 @@
         "userReportAttributes" : {
           "type": "object",
           "properties": {
+
+            "patientId":{
+              "type": "integer",
+              "example": 0
+            },
+            "testId" : {
+              "type": "integer",
+              "example": 0
+            },
+
             "testResult": {
               "type": "json",
               "example": {
@@ -834,6 +844,18 @@
             }
         }
 
+      },
+
+      "updateUserReportAttributes" : {
+        "type": "object",
+        "properties": {
+          "testResult": {
+            "type": "json",
+            "example": {
+              "wbc" : "5000"
+            }
+          }
+        }
       }
     },
       "parameters": {
