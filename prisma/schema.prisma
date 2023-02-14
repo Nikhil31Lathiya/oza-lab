@@ -51,7 +51,7 @@ model Patient {
 model Test {
   id          Int          @id @default(autoincrement())
   name        String       @map("name")
-  shortName   String       @map("short_name")
+  shortName    String       @map("short_name")
   isActive    Boolean      @map("is_active")
   price       Float
   measurement Json
