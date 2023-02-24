@@ -6,6 +6,7 @@ class UserRepository {
   }
 
   getUsers () {
+    console.log('getUsers')
     return this.prisma.user.findMany()
   }
 
@@ -26,8 +27,12 @@ class UserRepository {
   }
 
   createUser (body) {
+    const userObject = {
+      ...body,
+      roleId: 3
+    }
     return this.prisma.user.create({
-      data: body
+      data: userObject
     })
   }
 

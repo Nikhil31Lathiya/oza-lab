@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,25 +7,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  User
-  Admin
-  SuperAdmin
+model role {
+  id         Int          @id @default(autoincrement())
+  role       String
+  User       User[]
+  Permission Permission[]
+}
+
+model Permission {
+  id             Int    @id @default(autoincrement())
+  permissionName String
+  roleId         Int    @map("role_id")
+  role           role   @relation(fields: [roleId], references: [id])
 }
 
 model User {
   id        Int       @id @default(autoincrement())
-  role      Role      @default(User)
+  roleId    Int       @map("role_id")
   title     String
   firstName String    @map("first_name")
   lastName  String?   @map("last_name")
   gender    String
-  dob       DateTime @db.Date
+  dob       DateTime  @db.Date
   email     String    @unique
   contact   String
   address   String
   createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
   updatedAt DateTime  @default(now()) @map("updated_at") @db.Timestamp(6)
+  role      role      @relation(fields: [roleId], references: [id])
   Patient   Patient[]
 
   @@map("user")
@@ -49,7 +57,7 @@ model Patient {
 model Test {
   id          Int          @id @default(autoincrement())
   name        String       @map("name")
-  shortName    String       @map("short_name")
+  shortName   String       @map("short_name")
   isActive    Boolean      @map("is_active")
   price       Float
   measurement Json

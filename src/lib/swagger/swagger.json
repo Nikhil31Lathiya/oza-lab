@@ -86,20 +86,6 @@
         "summary": "List of all users",
         "description": "List  of all users",
         "operationId": "listUsers",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/PageFilter"
-          },
-          {
-            "$ref": "#/components/parameters/PerPageFilter"
-          },
-          {
-            "$ref": "#/components/parameters/SortFilter"
-          },
-          {
-            "$ref": "#/components/parameters/FieldsFilter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successfully list The All Users",
@@ -194,9 +180,6 @@
         "description": "Read a Particular user",
         "operationId": "getUser",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/FieldsFilter"
-          },
           {
             "$ref": "#/components/parameters/UserIdParam"
           }
@@ -332,20 +315,6 @@
         "summary": "List of All Reports",
         "description": "List of All User Report",
         "operationId": "listUsersReport",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/PageFilter"
-          },
-          {
-            "$ref": "#/components/parameters/PerPageFilter"
-          },
-          {
-            "$ref": "#/components/parameters/SortFilter"
-          },
-          {
-            "$ref": "#/components/parameters/FieldsFilter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successfully list The All Users",
@@ -441,9 +410,6 @@
         "operationId": "getUserReport",
         "parameters": [
           {
-            "$ref": "#/components/parameters/FieldsFilter"
-          },
-          {
             "$ref": "#/components/parameters/UserIdParam"
           }
         ],
@@ -529,20 +495,6 @@
         "summary": "List Tests",
         "description": "List Tests",
         "operationId": "getTests",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/PageFilter"
-          },
-          {
-            "$ref": "#/components/parameters/PerPageFilter"
-          },
-          {
-            "$ref": "#/components/parameters/SortFilter"
-          },
-          {
-            "$ref": "#/components/parameters/FieldsFilter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successfully list Tests",
@@ -636,9 +588,6 @@
         "description": "Read a Test",
         "operationId": "getTest",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/FieldsFilter"
-          },
           {
             "$ref": "#/components/parameters/TestIdParam"
           }
@@ -775,20 +724,6 @@
         "summary": "List Patients",
         "description": "List Patients",
         "operationId": "getPatients",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/PageFilter"
-          },
-          {
-            "$ref": "#/components/parameters/PerPageFilter"
-          },
-          {
-            "$ref": "#/components/parameters/SortFilter"
-          },
-          {
-            "$ref": "#/components/parameters/FieldsFilter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successfully list Patients",
@@ -882,9 +817,6 @@
         "description": "Read a Patient",
         "operationId": "getPatient",
         "parameters": [
-          {
-            "$ref": "#/components/parameters/FieldsFilter"
-          },
           {
             "$ref": "#/components/parameters/PatientIdParam"
           }
@@ -1248,6 +1180,7 @@
               "firstName",
               "address",
               "email",
+              "password",
               "gender",
               "dob",
               "contact"
@@ -1273,6 +1206,10 @@
       "UserAttributes": {
         "type": "object",
         "properties": {
+          "title": {
+            "type": "string",
+            "example": "mr , ms , mrs"
+          },
           "firstName": {
             "type": "string",
             "example": "Nikhil"
@@ -1287,18 +1224,18 @@
             "format": "email",
             "example": "tom@jerry.com"
           },
-          "role": {
+          "password": {
             "type": "string",
-            "example": "User Admin SuperAdmin",
-            "default": "User"
+            "example": "xyz@51"
+          },
+          "roleId": {
+            "type": "integer",
+            "example": 1,
+            "default": 3
           },
           "gender": {
             "type": "string",
             "example": "male female"
-          },
-          "title": {
-            "type": "string",
-            "example": " mr , ms , baby , master , dr"
           },
           "dob": {
             "type": "string",
