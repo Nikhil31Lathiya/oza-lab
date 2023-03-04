@@ -17,7 +17,11 @@ class PatientRepository {
 
   async getPatients () {
     try {
-      return this.prisma.patient.findMany()
+      return this.prisma.patient.findMany({
+        orderBy: {
+          id: 'asc'
+        }
+      })
     } catch (error) {
       console.log(error)
     }

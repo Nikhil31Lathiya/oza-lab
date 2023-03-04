@@ -1,8 +1,7 @@
 import nodemailer from 'nodemailer'
 // import TokenRepository from '../../domain/token/token.repository.js'
 
-export async function SendMail (req, res) {
-  const otp = Math.floor(100000 + Math.random() * 900000)
+export async function SendMailUserReport (req, res) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -15,8 +14,8 @@ export async function SendMail (req, res) {
   const mailOptions = {
     from: 'ozalab.original@gmail.com',
     to: `${req.body.email.toLowerCase()}`,
-    subject: 'Verification Email',
-    html: `<p>OZA-LAB verification OTP: <b>${otp}</b></p>`
+    subject: 'OZA LAB:Report Ready',
+    html: '<p>Your report is ready. Please view/download the report.</p>'
   }
 
   // send mail with defined transport object
@@ -26,7 +25,7 @@ export async function SendMail (req, res) {
       return res.json({ message: 'Error While sending email', info })
     } else {
       console.log('Email sent: ' + info.response)
-      return res.json({ message: 'email sent successfully', info, sent: true, otp })
+      return res.json({ message: 'email sent successfully', info, sent: true })
     //   return { message: 'email sent successfully' }
     }
   })

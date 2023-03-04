@@ -12,7 +12,6 @@ export async function login (req, res) {
   }
   const { email, password } = req.body
   const user = await userRepository.getUserByEmail(email)
-  console.log(user)
   if (!user) {
     return res.json({ message: 'Account doesn`t exist. Please sign up.' })
   }

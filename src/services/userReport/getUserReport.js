@@ -2,7 +2,6 @@ import UserReportRepository from '../../domain/userReport/userReport.repository.
 
 export async function getUserReport (req, res) {
   const userReportRepository = new UserReportRepository()
-
   const user = await userReportRepository.getUserReport(parseInt(req.params.id))
   if (user) {
     return res.status(200).json(user)

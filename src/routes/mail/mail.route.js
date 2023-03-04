@@ -1,7 +1,8 @@
 import express from 'express'
-import { SendMail } from '../../services/mail/index.js'
+import { SendMail, SendMailUserReport } from '../../services/mail/index.js'
 const emailRoute = express.Router()
 
 emailRoute.post('/', async (req, res) => SendMail(req, res))
+emailRoute.post('/userReport', async (req, res) => SendMailUserReport(req, res))
 
 export default emailRoute
