@@ -1,9 +1,10 @@
 import express from 'express'
-import { createUserReport, deleteUserReport, getAllUserReport, getUserReport, updateUserReport } from '../../services/userReport/index.js'
+import { createUserReport, deleteUserReport, getAllUserReport, getUserReport, getUserReportCount, updateUserReport } from '../../services/userReport/index.js'
 
 const userReportRoute = express.Router()
 
 userReportRoute.get('/', (req, res) => getAllUserReport(req, res))
+userReportRoute.get('/count', (req, res) => getUserReportCount(req, res))
 userReportRoute.get('/:id', (req, res) => getUserReport(req, res))
 userReportRoute.post('/', (req, res) => createUserReport(req, res))
 userReportRoute.delete('/:id', (req, res) => deleteUserReport(req, res))

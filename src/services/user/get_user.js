@@ -6,7 +6,7 @@ export async function getUser (req, res) {
   if (user) {
     return res.status(200).json(user)
   }
-  res.status(404).json({
+  res.status(200).json({
     message: 'User not found'
   })
 }

@@ -5,52 +5,82 @@ class UserRepository {
     this.prisma = new PrismaClient()
   }
 
-  getUsers () {
-    console.log('getUsers')
-    return this.prisma.user.findMany()
+  async getUsers () {
+    const usersInfo = await this.prisma.user.findMany()
+    await this.prisma.$disconnect()
+    return usersInfo
   }
 
-  getUser (id) {
-    return this.prisma.user.findFirst({
+  async getUser (id) {
+    const userInfo = await this.prisma.user.findFirst({
       where: {
         id
       }
     })
+    await this.prisma.$disconnect()
+    return userInfo
   }
 
-  getUserByEmail (email) {
-    return this.prisma.user.findFirst({
+  async getUserByIds (ids) {
+    const userByIds = await this.prisma.user.findMany({
+      where: {
+        id: {
+          in: ids
+        }
+      }
+    })
+    await this.prisma.$disconnect()
+    return userByIds
+  }
+
+  async getUserByEmail (email) {
+    const emailById = await this.prisma.user.findFirst({
       where: {
         email
       }
     })
+    await this.prisma.$disconnect()
+    return emailById
   }
 
-  createUser (body) {
+  async createUser (body) {
+    const { role, ...rest } = body
     const userObject = {
-      ...body,
-      roleId: 3
+      ...rest,
+      roleId: role === 'SUPER ADMIN' ? 1 : role === 'ADMIN' ? 2 : 3
     }
-    return this.prisma.user.create({
+    const userAdded = await this.prisma.user.create({
       data: userObject
     })
+    await this.prisma.$disconnect()
+    return userAdded
   }
 
-  deleteUser (id) {
-    return this.prisma.user.delete({
+  async getUserCount () {
+    return this.prisma.user.count()
+  }
+
+  async deleteUser (id) {
+    const deletedUser = await this.prisma.user.delete({
       where: {
         id
       }
     })
+    await this.prisma.$disconnect()
+    return deletedUser
   }
 
-  updateUser (id, body) {
-    return this.prisma.user.update({
+  async updateUser (id, body) {
+    const { role, ...rest } = body
+    const roleId = role === 'SUPER ADMIN' ? 1 : role === 'ADMIN' ? 2 : 3
+    const userUpdated = await this.prisma.user.update({
       where: {
         id
       },
-      data: body
+      data: { roleId, ...rest }
     })
+    await this.prisma.$disconnect()
+    return userUpdated
   }
 }
 

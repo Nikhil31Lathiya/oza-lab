@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
-const ROLES = ['SUPERADMIN', 'ADMIN', 'USER']
+const ROLES = ['ADMIN', 'SUPERADMIN', 'USER']
 
 async function main () {
   Promise.all(

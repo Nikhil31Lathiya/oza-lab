@@ -17,6 +17,10 @@ class UserReportRepository {
     })
   }
 
+  getUserReportCount () {
+    return this.prisma.userReport.count()
+  }
+
   createUserReport (body) {
     return this.prisma.userReport.create({
       data: body

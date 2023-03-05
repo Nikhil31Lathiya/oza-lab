@@ -31,6 +31,22 @@ class TestRepository {
     }
   }
 
+  async getTestCount () {
+    try {
+      return this.prisma.test.count()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async getTestByName (name) {
+    try {
+      return this.prisma.test.findFirst({ where: { name } })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   async getTestsCount () {
     try {
       const total = await this.prisma.test.count()
