@@ -4,7 +4,7 @@ export async function deletePatient (req, res) {
   const patientRepository = new PatientRepository()
   const patient = await patientRepository.getPatient(parseInt(req.params.id))
   if (!patient) {
-    return res.status(404).json({ message: 'No patient found' })
+    return res.status(200).json({ message: 'No patient found' })
   }
   const deletePatient = await patientRepository.deletePatient(parseInt(req.params.id))
   if (deletePatient) {

@@ -17,7 +17,11 @@ class PatientRepository {
 
   async getPatients () {
     try {
-      return this.prisma.patient.findMany()
+      return this.prisma.patient.findMany({
+        orderBy: {
+          id: 'asc'
+        }
+      })
     } catch (error) {
       console.log(error)
     }
@@ -25,9 +29,10 @@ class PatientRepository {
 
   async getPatientsCount () {
     try {
-      const total = await this.prisma.patient.count()
-      console.log(total)
-      return total
+      const total = await this.prisma.patient.groupBy({
+        by: ['userId']
+      })
+      return total.length
     } catch (error) {
       console.log(error)
     }
