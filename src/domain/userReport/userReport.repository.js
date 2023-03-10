@@ -9,10 +9,24 @@ class UserReportRepository {
     return this.prisma.userReport.findMany()
   }
 
-  getUserReport (id) {
-    return this.prisma.userReport.findFirst({
+  async getUserReport (id) {
+    console.log({ inrepo: id })
+    const data = await this.prisma.userReport.findFirst({
       where: {
-        id
+        id: parseInt(id, 10)
+      }
+    })
+    console.log({ inrepo: data })
+    await this.prisma.$disconnect()
+    return data
+  }
+
+  getUserReportUserId (patientIds) {
+    return this.prisma.userReport.findMany({
+      where: {
+        patientId: {
+          in: patientIds
+        }
       }
     })
   }

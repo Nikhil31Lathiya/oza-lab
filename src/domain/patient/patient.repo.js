@@ -46,6 +46,14 @@ class PatientRepository {
     }
   }
 
+  async getPatientByUserId (userId) {
+    try {
+      return this.prisma.patient.findMany({ where: { userId } })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   async deletePatient (id) {
     try {
       const findPatient = await this.prisma.patient.findFirst({ where: { id } })

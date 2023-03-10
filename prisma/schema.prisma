@@ -81,3 +81,12 @@ model UserReport {
 
   @@map("user_report")
 }
+
+model HomeVisit {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @map("user_id")
+  testId      Int      @map("test_id")
+  bookingDate DateTime @db.Date
+  isApproved  Boolean  @default(false)
+  isActive    Boolean  @default(true)
+}
